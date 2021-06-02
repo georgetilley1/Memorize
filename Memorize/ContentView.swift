@@ -13,31 +13,46 @@ struct ContentView: View {
     
     var body: some View {
         VStack  {
-            HStack {
-                ForEach(emojis[0..<emojiCount] , id: \.self) { emoji in
-                    CardView(content: emoji)
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 75))]) {
+                    ForEach(emojis[0..<emojiCount] , id: \.self) { emoji in
+                        CardView(content: emoji).aspectRatio(2/3, contentMode: .fit)
+                    }
                 }
             }
-            Button(action: {
-                emojiCount += 1
-            }, label: {
-                VStack {
-                    Text("Add")
-                    Text("Card")
-                }
-            })
-            Button(action: {
-                emojiCount -= 1
-            }, label: {
-                VStack {
-                    Text("Remove")
-                    Text("Card")
-                }
-            })
+            .foregroundColor(.red)
+            Spacer()
+            HStack {
+                remove
+                Spacer()
+                add
+            }
+            .font(.largeTitle)
+            .padding(.horizontal)
         }
         .padding(.horizontal)
-        .foregroundColor(/*@START_MENU_TOKEN@*/.red/*@END_MENU_TOKEN@*/)
     }
+    
+    
+    var remove: some View {
+        Button {
+            if emojiCount > 1 {
+                emojiCount -= 1
+            }
+        } label: {
+            Image(systemName: "minus.circle")
+        }
+    }
+    var add: some View {
+        Button {
+            if emojiCount < emojis.count {
+                emojiCount += 1
+            }
+        } label: {
+            Image(systemName: "plus.circle")
+        }
+    }
+    
 }
 
 struct CardView: View {
@@ -49,7 +64,7 @@ struct CardView: View {
             let shape = RoundedRectangle(cornerRadius: 20)
             if isFaceUp {
                 shape.fill().foregroundColor(.white)
-                shape.stroke(lineWidth: 3)
+                shape.strokeBorder(lineWidth: 3)
                 Text(content).font(.largeTitle).foregroundColor(.orange)
             } else {
                 shape.fill()
