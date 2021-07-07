@@ -1,12 +1,3 @@
-//
-//  ContentView.swift
-//  Memorize
-//
-//  Created by George Tilley on 27/05/2021.
-//
-
-
-
 import SwiftUI
 
 struct ContentView: View {
@@ -38,18 +29,14 @@ struct CardView: View {
                 shape.fill().foregroundColor(.white)
                 shape.strokeBorder(lineWidth: 3)
                 Text(card.content).font(.largeTitle).foregroundColor(.orange)
+            } else if card.isMatched {
+                shape.opacity(0)
             } else {
                 shape.fill()
             }
         }
     }
 }
-
-
-
-
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

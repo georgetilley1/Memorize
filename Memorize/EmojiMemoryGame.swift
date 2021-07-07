@@ -1,17 +1,10 @@
-//
-//  EmojiMemoryGame.swift
-//  Memorize
-//
-//  Created by George Tilley on 29/06/2021.
-//
-
 import SwiftUI
 
 class EmojiMemoryGame: ObservableObject {
     static let emojis = ["🚙", "🚌", "🏎", "🚛", "🚓", "🚑", "✈️", "🚲", "🛴", "🚒", "🚔", "🚞", "🚝", "🚍", "⛴", "🛰", "🛵", "🏍", "🚂", "🚀", "🚁", "🛺", "🦼", "🚗"]
     
     static func createMemoryGame() -> MemoryGame<String> {
-        MemoryGame<String>(numberOfPairsOfCards: 4) {pairIndex in
+        MemoryGame<String>(numberOfPairsOfCards: 10) {pairIndex in
             emojis[pairIndex]
         }
     }
